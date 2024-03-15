@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int N = 25e2 + 10;
+vector<int> a(N);
+int dp[10005];
+int lis(int i)
+{
+    int ans = 1;
+    if(dp[i] != -1)
+        return dp[i];
+    for (int j = 0; j < i; j++)//confusion was that when it is calling for 2 i = become 2 so the is continuing 2
+    {// ex: 4 er ager sob gula chOto only nibe and sob gula choto tader choto nibe sobai sober max ta dibe/karon age choto paile ee to aber sei call er modee dhukbe
+        if (a[i] > a[j])//if(lis(7)) means 7 only do call all smaller value from him
+        {               // all smaller value do call all smaller from them and will give each other max result
+          //  lastly 7 would get the max value;
+            ans = max(ans, lis(j) + 1);
+        }
+    }
+
+        return dp[i] = ans ;
+}
+
+int main(){
+    int n;
+    cin >> n;
+    memset(dp, -1, sizeof(dp));
+    for (int i = 0; i <= n; i++)
+    {
+        cin >> a[i];
+    }
+    int ans = 0;
+    ans = lis(8);
+    for (int i = 0; i < n; i++)
+    {
+       // ans = max(ans, lis(i));
+    }
+    cout << ans;
+}
